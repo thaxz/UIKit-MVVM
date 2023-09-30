@@ -11,12 +11,20 @@ class PeopleViewController: UIViewController {
     
     //MARK: Components
 
-    private lazy var personView: PersonView = {
-        let vw = PersonView { [weak self] in
-            // action
-            self?.sayHello()
-        }
-        return vw
+//    private lazy var personView: PersonView = {
+//        let vw = PersonView { [weak self] in
+//            // action
+//            self?.sayHello()
+//        }
+//        return vw
+//    }()
+    
+    private lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = .init(width: UIScreen.main.bounds.width, height: 130)
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        cv.translatesAutoresizingMaskIntoConstraints = false
+        return cv
     }()
     
     override func viewDidLoad() {
@@ -32,16 +40,16 @@ private extension PeopleViewController {
     
     func setup(){
         self.view.backgroundColor = .white
-        self.view.addSubview(personView)
+        self.view.addSubview(collectionView )
         setConstraints()
     }
     
     func setConstraints(){
         NSLayoutConstraint.activate([
-            // using container to have a color background
-            personView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            personView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
-            personView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
+            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
     }
     

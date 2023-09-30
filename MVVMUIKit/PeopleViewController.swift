@@ -24,6 +24,29 @@ class PeopleViewController: UIViewController {
         return btn
     }()
 
+    private lazy var personContainer: UIView = {
+       let vw = UIView()
+        vw.backgroundColor = UIColor.gray.withAlphaComponent(0.1)
+        vw.translatesAutoresizingMaskIntoConstraints = false
+        return vw
+    }()
+    
+    private lazy var nameLb: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Taylor Swift"
+        label.font = .systemFont(ofSize: 24, weight: .bold)
+        return label
+    }()
+    
+    private lazy var emailLb: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "tswift13@gmail.com"
+        label.font = .systemFont(ofSize: 15, weight: .regular)
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print("hi")

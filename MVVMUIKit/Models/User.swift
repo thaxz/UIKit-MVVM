@@ -9,12 +9,13 @@ import Foundation
 
 // API: https://reqres.in/api/users?page=2
 
-struct UsersResponse: Codable {
-    let data: [PersonResponse]
+struct PersonResponse: Codable {
+    let data: [Person]
 }
 
-struct PersonResponse: Codable {
+struct Person: Codable {
     let email: String
     let firstName: String
     let lastName: String
 }
+

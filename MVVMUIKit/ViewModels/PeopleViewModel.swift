@@ -7,28 +7,35 @@
 
 import Foundation
 
+protocol PeopleViewModelDelegate: AnyObject {
+    func didFinish()
+    func didFail(_ error: Error)
+}
+
 class PeopleViewModel {
     
-    private(set) var people: [PersonResponse] = []
+    private(set) var people = [Person]()
     
-    func getUsers(){
+    weak var delegate: PeopleViewModelDelegate?
+    
+    @MainActor
+    func getUsers() {
+        
         Task { [weak self] in
-            let url = URL(string:"https://reqres.in/api/users")!
+            
             do {
-                let (data, _) =  try await URLSession.shared.data(from: url)
-                // decoding from snake case
-                let jsonDecoder = JSONDecoder()
-                jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
-                // getting data
-                self?.people = try  jsonDecoder.decode(UsersResponse.self, from: data).data
                 
+                let url = URL(string: "https://reqres.in/api/users")!
+                let (data, _) = try await URLSession.shared.data(from: url)
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let personRes = try decoder.decode(PersonResponse.self, from: data)
+                self?.people = personRes.data
+                self?.delegate?.didFinish()
             } catch {
+                self?.delegate?.didFail(error)
                 print(error)
             }
-            
         }
     }
-    
-    
-    
 }

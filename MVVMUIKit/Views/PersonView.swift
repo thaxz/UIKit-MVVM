@@ -7,51 +7,55 @@
 
 import UIKit
 
+import UIKit
+
 class PersonView: UIView {
 
-    //MARK: Components
-    
     private lazy var subscribeBtn: UIButton = {
+        
         var config = UIButton.Configuration.filled()
-        config.title = "SUBSCRIBE"
-        config.baseBackgroundColor = .red
-        config.baseForegroundColor = .white
+        config.title = "Subscribe".uppercased()
+        config.baseBackgroundColor = UIColor.red
+        config.baseForegroundColor = UIColor.white
         config.buttonSize = .large
         config.cornerStyle = .medium
+        
         let btn = UIButton(configuration: config)
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.addTarget(self, action: #selector(didTapSubscribe), for: .touchUpInside)
         return btn
     }()
     
-    private lazy var nameLb: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Taylor Swift"
-        label.font = .systemFont(ofSize: 24, weight: .bold)
-        return label
+    private lazy var personDetailsStackVw: UIStackView = {
+        
+        let vw = UIStackView()
+        vw.translatesAutoresizingMaskIntoConstraints = false
+        vw.axis = .vertical
+        vw.spacing = 8
+        return vw
     }()
     
-    private lazy var emailLb: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "tswift13@gmail.com"
-        label.font = .systemFont(ofSize: 15, weight: .regular)
-        return label
+    private lazy var nameLbl: UILabel = {
+        
+        let lbl = UILabel()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        lbl.text = "Billy Bob"
+        lbl.font = .systemFont(ofSize: 24, weight: .bold)
+        return lbl
     }()
     
-    private lazy var personStackView: UIStackView = {
-           let vw = UIStackView()
-            vw.axis = .vertical
-            vw.spacing = 8
-            vw.translatesAutoresizingMaskIntoConstraints = false
-            return vw
-        }()
+    private lazy var emailLbl: UILabel = {
+        
+        let lbl = UILabel()
+        lbl.translatesAutoresizingMaskIntoConstraints = false
+        lbl.text = "billy.bob@gmail.com"
+        lbl.font = .systemFont(ofSize: 15, weight: .regular)
+        return lbl
+    }()
     
-    private var action: () -> ()
-    
-    init(action: @escaping () -> ()){
-        self.action = action
+    private var completion: () -> ()
+
+    init(completion: @escaping () -> ()) {
+        self.completion = completion
         super.init(frame: .zero)
         setup()
     }
@@ -60,36 +64,40 @@ class PersonView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func set(name: String, email: String) {
+        nameLbl.text = name
+        emailLbl.text = email
+    }
 }
 
-private extension PersonView {
+extension PersonView {
     
-    func setup(){
-        // Background config
-        self.layer.cornerRadius = 10
+    func setup() {
+        
         self.backgroundColor = UIColor.gray.withAlphaComponent(0.1)
         self.translatesAutoresizingMaskIntoConstraints = false
+        self.layer.cornerRadius = 10
         
-        self.addSubview(personStackView)
-        // to work as a VStack
-        personStackView.addArrangedSubview(nameLb)
-        personStackView.addArrangedSubview(emailLb)
-        personStackView.addArrangedSubview(subscribeBtn)
-        setConstraints()
-    }
-    
-    func setConstraints(){
+        self.addSubview(personDetailsStackVw)
+        
+        personDetailsStackVw.addArrangedSubview(nameLbl)
+        personDetailsStackVw.addArrangedSubview(emailLbl)
+        personDetailsStackVw.addArrangedSubview(subscribeBtn)
+                
         NSLayoutConstraint.activate([
-            // STACK
-            personStackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 8),
-            personStackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8),
-            personStackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
-            personStackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8),
-            
+                        
+            personDetailsStackVw.topAnchor.constraint(equalTo: self.topAnchor, constant: 8),
+            personDetailsStackVw.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
+            personDetailsStackVw.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8),
+            personDetailsStackVw.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8)
         ])
+        
+        subscribeBtn.addTarget(self,
+                               action: #selector(didTapSubscribe),
+                               for: .touchUpInside)
     }
     
-    @objc func didTapSubscribe(sender: UIButton){
-        action()
+    @objc func didTapSubscribe(sender: UIButton) {
+        completion()
     }
 }

@@ -12,7 +12,10 @@ class PeopleViewController: UIViewController {
     //MARK: Components
 
     private lazy var personView: PersonView = {
-       let vw = PersonView()
+        let vw = PersonView { [weak self] in
+            // action
+            self?.sayHello()
+        }
         return vw
     }()
     
@@ -41,4 +44,9 @@ private extension PeopleViewController {
             personView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
         ])
     }
+    
+    func sayHello(){
+        print("saying hello")
+    }
+    
 }

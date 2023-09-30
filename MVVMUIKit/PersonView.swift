@@ -47,9 +47,12 @@ class PersonView: UIView {
             vw.translatesAutoresizingMaskIntoConstraints = false
             return vw
         }()
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    
+    private var action: () -> ()
+    
+    init(action: @escaping () -> ()){
+        self.action = action
+        super.init(frame: .zero)
         setup()
     }
     
@@ -87,6 +90,6 @@ private extension PersonView {
     }
     
     @objc func didTapSubscribe(sender: UIButton){
-        print("subscribing")
+        action()
     }
 }

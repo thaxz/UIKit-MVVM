@@ -12,6 +12,7 @@
 		E95445A32AC770B700758F64 /* PeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95445A22AC770B700758F64 /* PeopleViewController.swift */; };
 		E95445A82AC770B800758F64 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E95445A72AC770B800758F64 /* Assets.xcassets */; };
 		E95445AB2AC770B800758F64 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E95445A92AC770B800758F64 /* LaunchScreen.storyboard */; };
+		E9B42C2E2AC8C9E40037BEF9 /* PersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B42C2D2AC8C9E40037BEF9 /* PersonView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		E95445A72AC770B800758F64 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E95445AA2AC770B800758F64 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E95445AC2AC770B800758F64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E9B42C2D2AC8C9E40037BEF9 /* PersonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 				E954459E2AC770B700758F64 /* AppDelegate.swift */,
 				E95445A02AC770B700758F64 /* SceneDelegate.swift */,
 				E95445A22AC770B700758F64 /* PeopleViewController.swift */,
+				E9B42C2D2AC8C9E40037BEF9 /* PersonView.swift */,
 				E95445A72AC770B800758F64 /* Assets.xcassets */,
 				E95445A92AC770B800758F64 /* LaunchScreen.storyboard */,
 				E95445AC2AC770B800758F64 /* Info.plist */,
@@ -135,6 +138,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E95445A32AC770B700758F64 /* PeopleViewController.swift in Sources */,
+				E9B42C2E2AC8C9E40037BEF9 /* PersonView.swift in Sources */,
 				E954459F2AC770B700758F64 /* AppDelegate.swift in Sources */,
 				E95445A12AC770B700758F64 /* SceneDelegate.swift in Sources */,
 			);

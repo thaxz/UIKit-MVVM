@@ -24,7 +24,7 @@ class PeopleViewController: UIViewController {
         return btn
     }()
 
-    private lazy var personContainer: UIView = {
+    private lazy var personContainerView: UIView = {
        let vw = UIView()
         vw.backgroundColor = UIColor.gray.withAlphaComponent(0.1)
         vw.translatesAutoresizingMaskIntoConstraints = false
@@ -47,6 +47,14 @@ class PeopleViewController: UIViewController {
         return label
     }()
     
+    private lazy var personStackView: UIStackView = {
+           let vw = UIStackView()
+            vw.axis = .vertical
+            vw.spacing = 8
+            vw.translatesAutoresizingMaskIntoConstraints = false
+            return vw
+        }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print("hi")
@@ -60,14 +68,30 @@ private extension PeopleViewController {
     
     func setup(){
         self.view.backgroundColor = .white
-        self.view.addSubview(subscribeBtn)
+        
+        self.view.addSubview(personContainerView)
+        
+        personContainerView.addSubview(personStackView)
+        // to work as a VStack
+        personStackView.addArrangedSubview(nameLb)
+        personStackView.addArrangedSubview(emailLb)
+        personStackView.addArrangedSubview(subscribeBtn)
         setConstraints()
     }
     
     func setConstraints(){
         NSLayoutConstraint.activate([
-            subscribeBtn.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            subscribeBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            // using container to have a color background
+            personContainerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            personContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
+            personContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
+            
+            // STACK
+            personStackView.topAnchor.constraint(equalTo: personContainerView.topAnchor, constant: 8),
+            personStackView.bottomAnchor.constraint(equalTo: personContainerView.bottomAnchor, constant: -8),
+            personStackView.leadingAnchor.constraint(equalTo: personContainerView.leadingAnchor, constant: 8),
+            personStackView.trailingAnchor.constraint(equalTo: personContainerView.trailingAnchor, constant: -8),
+            
         ])
     }
     
